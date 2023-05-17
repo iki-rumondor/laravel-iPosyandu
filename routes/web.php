@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\FetchController;
+use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/manajemen/posyandu', function () {
 //     return view('welcome');
 // });
 
-Route::resource('/manajemen/posyandu', PosyanduController::class);
+Route::resource('/posyandu/location', LocationController::class);
+
+Route::get('/fetch/getPosyandu/{posyandu}', [FetchController::class, 'getPosyandu']);

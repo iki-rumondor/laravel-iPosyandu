@@ -70,7 +70,7 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </span>
-                        <span class="sidebar-text">Manajemen</span>
+                        <span class="sidebar-text">Posyandu</span>
                     </span>
                     <span class="link-arrow">
                         <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
@@ -81,11 +81,11 @@
                         </svg>
                     </span>
                 </span>
-                <div class="multi-level collapse {{ Request::is('manajemen*') ? 'show' : '' }}" role="list" id="submenu-components" aria-expanded="false">
+                <div class="multi-level collapse {{ Request::is('posyandu*') ? 'show' : '' }}" role="list" id="submenu-components" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ Request::is('manajemen/posyandu*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('posyandu/lokasi*') ? 'active' : '' }}">
                             <a class="nav-link" href="../pages/components/typography.html">
-                                <span class="sidebar-text">Posyandu</span>
+                                <span class="sidebar-text small">Penempatan Lokasi</span>
                             </a>
                         </li>
                     </ul>

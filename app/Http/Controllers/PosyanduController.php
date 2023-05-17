@@ -11,7 +11,7 @@ class PosyanduController extends Controller
      */
     public function index()
     {
-        return view('posyandu.index');
+        
     }
 
     /**
