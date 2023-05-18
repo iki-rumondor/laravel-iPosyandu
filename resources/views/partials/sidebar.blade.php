@@ -83,9 +83,14 @@
                 </span>
                 <div class="multi-level collapse {{ Request::is('posyandu*') ? 'show' : '' }}" role="list" id="submenu-components" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ Request::is('posyandu/lokasi*') ? 'active' : '' }}">
-                            <a class="nav-link" href="../pages/components/typography.html">
+                        <li class="nav-item {{ Request::is('posyandu/location*') ? 'active' : '' }}">
+                            <a class="nav-link" href="/posyandu/location">
                                 <span class="sidebar-text small">Penempatan Lokasi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('posyandu/schedule*') ? 'active' : '' }}">
+                            <a class="nav-link" href="/posyandu/schedule">
+                                <span class="sidebar-text small">Penjadwalan</span>
                             </a>
                         </li>
                     </ul>
