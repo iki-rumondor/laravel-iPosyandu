@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kader;
 use App\Models\Posyandu;
 use App\Models\Schedule;
+use App\Models\Vitamin;
 use Illuminate\Http\Request;
 
 class FetchController extends Controller
@@ -17,6 +18,11 @@ class FetchController extends Controller
     public function getKader(Kader $kader)
     {
         return response()->json($kader);
+    }
+    
+    public function getVitamin(Vitamin $vitamin)
+    {
+        return response()->json($vitamin);
     }
 
     public function getSchedule(Schedule $schedule)
