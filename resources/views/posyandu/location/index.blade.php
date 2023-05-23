@@ -17,12 +17,12 @@
         </div>
     </div>
 
-    @include('partials.table_settings')
+    @if ($posyandu->isEmpty())
+        <h6 class="text-center">Data Posyandu Belum ada</h6>
+    @else
+        @include('partials.table_settings')
 
-    <div class="card card-body border-0 shadow table-wrapper table-responsive">
-        @if ($posyandu->isEmpty())
-            <h6 class="text-center">Data Posyandu Belum ada</h6>
-        @else
+        <div class="card card-body border-0 shadow table-wrapper table-responsive">
             <table id="posyandu-table" class="table table-hover display">
                 <thead>
                     <tr>
@@ -64,9 +64,9 @@
                     @endforeach
                 </tbody>
             </table>
-        @endif
+    @endif
 
-        {{-- <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+    {{-- <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
             <nav aria-label="Page navigation example">
                 <ul class="pagination mb-0">
                     <li class="page-item">

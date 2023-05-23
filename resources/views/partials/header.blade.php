@@ -17,5 +17,4 @@
         </ol>
     </nav>
     <h2 class="h4">{{ $title }}</h2>
-    <p class="mb-0">{{ $subtitle }}</p>
 </div>
