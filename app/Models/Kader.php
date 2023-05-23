@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Posyandu extends Model
+class Kader extends Model
 {
     use HasFactory;
-    
+
     protected $guarded = ['id'];
 
-    public function schedules()
+    public function posyandu()
     {
-        return $this->hasMany(Schedule::class);
+        return $this->belongsTo(Posyandu::class);   
     }
 }

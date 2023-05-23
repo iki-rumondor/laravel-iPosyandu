@@ -59,7 +59,7 @@
             
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse" data-bs-target="#submenu-components">
+                    data-bs-toggle="collapse" data-bs-target="#submenu-posyandu">
                     <span>
                         <span class="sidebar-icon">
                             <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
@@ -81,11 +81,51 @@
                         </svg>
                     </span>
                 </span>
-                <div class="multi-level collapse {{ Request::is('posyandu*') ? 'show' : '' }}" role="list" id="submenu-components" aria-expanded="false">
+                <div class="multi-level collapse {{ Request::is('posyandu*') ? 'show' : '' }}" role="list" id="submenu-posyandu" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ Request::is('posyandu/lokasi*') ? 'active' : '' }}">
-                            <a class="nav-link" href="../pages/components/typography.html">
+                        <li class="nav-item {{ Request::is('posyandu/location*') ? 'active' : '' }}">
+                            <a class="nav-link" href="/posyandu/location">
                                 <span class="sidebar-text small">Penempatan Lokasi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('posyandu/schedule*') ? 'active' : '' }}">
+                            <a class="nav-link" href="/posyandu/schedule">
+                                <span class="sidebar-text small">Penjadwalan</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            
+            <li class="nav-item">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    data-bs-toggle="collapse" data-bs-target="#submenu-kader">
+                    <span>
+                        <span class="sidebar-icon">
+                            <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
+                                <path fill-rule="evenodd"
+                                    d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <span class="sidebar-text">Kader</span>
+                    </span>
+                    <span class="link-arrow">
+                        <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                </span>
+                <div class="multi-level collapse {{ Request::is('kader*') ? 'show' : '' }}" role="list" id="submenu-kader" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item {{ Request::is('kader*') ? 'active' : '' }}">
+                            <a class="nav-link" href="/kader/data">
+                                <span class="sidebar-text small">Data Kader</span>
                             </a>
                         </li>
                     </ul>
