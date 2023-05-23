@@ -14,8 +14,7 @@ class LocationController extends Controller
     {
         return view('posyandu.location.index', [
             'title' => 'Penempatan Lokasi Posyandu',
-            'subtitle' => 'Manajemen Posyandu',
-            'breadcumb' => ['Posyandu', 'Penentuan Lokasi'],
+            'breadcumb' => ['Manajemen Posyandu', 'Penentuan Lokasi'],
             'posyandu' => Posyandu::all(),
         ]);
     }
