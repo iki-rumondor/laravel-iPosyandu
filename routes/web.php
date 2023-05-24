@@ -24,7 +24,8 @@ Route::prefix('kader')->group(function () {
 
 Route::prefix('peserta')->group(function () {
     Route::resource('data', DataPesertaController::class);
-
+});
+    
 Route::prefix('obat')->group(function () {
     Route::resource('vitamin', VitaminController::class);
 
