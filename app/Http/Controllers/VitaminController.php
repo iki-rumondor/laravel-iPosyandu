@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posyandu;
+use App\Models\Vitamin;
 use Illuminate\Http\Request;
 
-class LocationController extends Controller
+class VitaminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('posyandu.location.index', [
-            'title' => 'Penempatan Lokasi Posyandu',
-            'breadcumb' => ['Manajemen Posyandu', 'Penentuan Lokasi'],
-            'posyandu' => Posyandu::all(),
+        return view('obat.vitamin', [
+            'title' => 'Manajemen Vitamin',
+            'breadcumb' => ['Manajemen Obat', 'Vitamin'],
+            'vitamins' => Vitamin::all(),
         ]);
     }
 
@@ -24,6 +24,7 @@ class LocationController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -32,12 +33,12 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $validatedData = $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
-        Posyandu::create($validatedData);
+        Vitamin::create($validatedData);
 
-        return back()->with('success', 'Berhasil menambah data posyandu');
+        return back()->with('success', 'Berhasil menambah data vitamin');
     }
 
     /**
@@ -59,24 +60,24 @@ class LocationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Posyandu $location)
+    public function update(Request $request, Vitamin $vitamin)
     {
-        
         $validatedData = $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
-        $location->update($validatedData);
+        $vitamin->update($validatedData);
 
-        return back()->with('success', 'Berhasil merubah data posyandu');
+        return back()->with('success', 'Berhasil mengubah data vitamin');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Posyandu $location)
+    public function destroy(Vitamin $vitamin)
     {
-        $location->delete();
-        return back()->with('success', 'Berhasil menghapus data posyandu');
+        $vitamin->delete();
+
+        return back()->with('success', 'Berhasil menghapus data vitamin');
     }
 }
