@@ -56,7 +56,7 @@
                     <span class="sidebar-text fw-light">Dashboard</span>
                 </a>
             </li>
-            
+
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-posyandu">
@@ -81,7 +81,8 @@
                         </svg>
                     </span>
                 </span>
-                <div class="multi-level collapse {{ Request::is('posyandu*') ? 'show' : '' }}" role="list" id="submenu-posyandu" aria-expanded="false">
+                <div class="multi-level collapse {{ Request::is('posyandu*') ? 'show' : '' }}" role="list"
+                    id="submenu-posyandu" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::is('posyandu/location*') ? 'active' : '' }}">
                             <a class="nav-link" href="/posyandu/location">
@@ -96,7 +97,7 @@
                     </ul>
                 </div>
             </li>
-            
+
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-kader">
@@ -121,7 +122,8 @@
                         </svg>
                     </span>
                 </span>
-                <div class="multi-level collapse {{ Request::is('kader*') ? 'show' : '' }}" role="list" id="submenu-kader" aria-expanded="false">
+                <div class="multi-level collapse {{ Request::is('kader*') ? 'show' : '' }}" role="list"
+                    id="submenu-kader" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::is('kader*') ? 'active' : '' }}">
                             <a class="nav-link" href="/kader/data">
@@ -131,11 +133,11 @@
                     </ul>
                 </div>
             </li>
-            
+
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-peserta">
-                     <span>
+                    <span>
                         <span class="sidebar-icon">
                             <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -157,18 +159,19 @@
                         </svg>
                     </span>
                 </span>
-            <div class="multi-level collapse {{ Request::is('peserta*') ? 'show' : '' }}" role="list" id="submenu-peserta" aria-expanded="false">
+                <div class="multi-level collapse {{ Request::is('peserta*') ? 'show' : '' }}" role="list"
+                    id="submenu-peserta" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::is('peserta*') ? 'active' : '' }}">
                             <a class="nav-link" href="/peserta/data">
                                 <span class="sidebar-text small">Data Peserta</span>
-            
-            </a>
+
+                            </a>
                         </li>
                     </ul>
                 </div>
             </li>
-            
+
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-obat">
@@ -196,11 +199,17 @@
                     </span>
                 </span>
 
-                <div class="multi-level collapse {{ Request::is('obat*') ? 'show' : '' }}" role="list" id="submenu-obat" aria-expanded="false">
+                <div class="multi-level collapse {{ Request::is('obat*') ? 'show' : '' }}" role="list"
+                    id="submenu-obat" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::is('obat/vitamin*') ? 'active' : '' }}">
                             <a class="nav-link" href="/obat/vitamin">
                                 <span class="sidebar-text small">Vitamin</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('obat/imunisasi*') ? 'active' : '' }}">
+                            <a class="nav-link" href="/obat/imunisasi">
+                                <span class="sidebar-text small">Imunisasi</span>
                             </a>
                         </li>
                     </ul>
