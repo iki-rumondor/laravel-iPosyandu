@@ -4,6 +4,7 @@ use App\Http\Controllers\DataKaderController;
 use App\Http\Controllers\DataPesertaController;
 use App\Http\Controllers\FetchController;
 use App\Http\Controllers\ImunisasiController;
+use App\Http\Controllers\KbController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\VitaminController;
@@ -30,6 +31,7 @@ Route::prefix('peserta')->group(function () {
 Route::prefix('obat')->group(function () {
     Route::resource('vitamin', VitaminController::class);
     Route::resource('imunisasi', ImunisasiController::class);
+    Route::resource('kb', KbController::class);
 });
 
 Route::prefix('fetch')->group(function () {
@@ -39,5 +41,6 @@ Route::prefix('fetch')->group(function () {
     Route::get('get-peserta/{peserta}', [FetchController::class, 'getPeserta']);
     Route::get('get-vitamin/{vitamin}', [FetchController::class, 'getVitamin']);
     Route::get('get-imunisasi/{imunisasi}', [FetchController::class, 'getImunisasi']);
+    Route::get('get-kb/{kb}', [FetchController::class, 'getKb']);
     Route::get('set-schedules-table/{posyandu}', [FetchController::class, 'setSchedulesTable']);
 });

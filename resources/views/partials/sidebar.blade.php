@@ -187,7 +187,7 @@
                             </svg>
                         </span>
 
-                        <span class="sidebar-text">Obat-obatan</span>
+                        <span class="sidebar-text fw-light">Obat-obatan</span>
                     </span>
                     <span class="link-arrow">
                         <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
@@ -210,6 +210,11 @@
                         <li class="nav-item {{ Request::is('obat/imunisasi*') ? 'active' : '' }}">
                             <a class="nav-link" href="/obat/imunisasi">
                                 <span class="sidebar-text small">Imunisasi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('obat/kb*') ? 'active' : '' }}">
+                            <a class="nav-link" href="/obat/kb">
+                                <span class="sidebar-text small">KB</span>
                             </a>
                         </li>
                     </ul>
