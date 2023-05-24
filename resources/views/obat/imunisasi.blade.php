@@ -17,8 +17,8 @@
         </div>
     </div>
 
-    @if ($vitamins->isEmpty())
-        <h6 class="text-center">Data Vitamin Belum ada</h6>
+    @if ($imunisasis->isEmpty())
+        <h6 class="text-center">Data Imunisasi Belum ada</h6>
     @else
         @include('partials.table_settings')
 
@@ -26,18 +26,18 @@
             <table id="vitamin-table" class="table table-hover display">
                 <thead>
                     <tr>
-                        <th class="border-gray-200">Nama Vitamin</th>
+                        <th class="border-gray-200">Nama Imunisasi</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($vitamins as $vitamin)
+                    @foreach ($imunisasis as $imunisasi)
                         <tr>
-                            <td>{{ $vitamin->name }}</td>
+                            <td>{{ $imunisasi->name }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
-                                    data-bs-target="#editModal" data-id="{{ $vitamin->id }}">
-                                    <svg data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Data Vitamin"
+                                    data-bs-target="#editModal" data-id="{{ $imunisasi->id }}">
+                                    <svg data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Data imunisasi"
                                         class="icon icon-xs" fill="none" stroke="currentColor" stroke-width="1.5"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -47,8 +47,8 @@
                                 </button>
 
                                 <button class="btn-delete btn btn-sm btn-danger animate-up-3" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal" data-id="{{ $vitamin->id }}">
-                                    <svg data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Data Vitamin"
+                                    data-bs-target="#deleteModal" data-id="{{ $imunisasi->id }}">
+                                    <svg data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Data imunisasi"
                                         class="icon icon-xs" fill="none" stroke="currentColor" stroke-width="1.5"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -68,20 +68,20 @@
 @endsection
 
 @push('modals')
-    <form action="/obat/vitamin" method="post" autocomplete="off">
+    <form action="/obat/imunisasi" method="post" autocomplete="off">
         @csrf
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="h6 modal-title">Tambah Vitamin</h2>
+                        <h2 class="h6 modal-title">Tambah Imunisasi</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name">Nama Vitamin</label>
+                            <label for="name">Nama Imunisasi</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Vitamin" required>
+                                placeholder="Masukkan Nama imunisasi" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -101,14 +101,14 @@
                     @method('patch')
                     @csrf
                     <div class="modal-header bg-secondary">
-                        <h2 class="h6 modal-title">Edit Data Vitamin</h2>
+                        <h2 class="h6 modal-title">Edit Data Imunisasi</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name">Nama Kader</label>
+                            <label for="name">Nama Imunisasi</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Kader" required>
+                                placeholder="Masukkan Nama Imunisasi" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -129,12 +129,12 @@
                     @method('delete')
                     @csrf
                     <div class="modal-header bg-danger">
-                        <h2 class="h6 modal-title text-white">Hapus Data Vitamin</h2>
+                        <h2 class="h6 modal-title text-white">Hapus Data Imunisasi</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         Tekan tombol <b class="text-danger">Hapus</b> dibawah untuk mengkonfirmasi penghapusan data
-                        vitamin
+                        imunisasi
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Hapus</button>
@@ -153,8 +153,8 @@
         $('.btn-edit').click(function() {
             const id = $(this).data('id')
 
-            $('#editModal form').attr('action', '/obat/vitamin/' + id)
-            fetch('/fetch/get-vitamin/' + id)
+            $('#editModal form').attr('action', '/obat/imunisasi/' + id)
+            fetch('/fetch/get-imunisasi/' + id)
                 .then(response => {
                     return response.json()
                 })
@@ -165,7 +165,7 @@
 
         $('.btn-delete').click(function() {
             const id = $(this).data('id')
-            $('#deleteModal form').attr('action', '/obat/vitamin/' + id)
+            $('#deleteModal form').attr('action', '/obat/imunisasi/' + id)
         })
     </script>
 @endpush
