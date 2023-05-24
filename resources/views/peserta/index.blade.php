@@ -11,30 +11,32 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
                     </path>
                 </svg>
-                Tambah Posyandu
+                Tambah Peserta
             </button>
 
         </div>
     </div>
 
-    @if ($posyandu->isEmpty())
-        <h6 class="text-center">Data Posyandu Belum ada</h6>
+    @if ($peserta->isEmpty())
+        <h6 class="text-center">Data Peserta Belum ada</h6>
     @else
         @include('partials.table_settings')
 
         <div class="card card-body border-0 shadow table-wrapper table-responsive">
-            <table id="posyandu-table" class="table table-hover display">
+            <table id="kader-table" class="table table-hover display">
                 <thead>
                     <tr>
                         <th class="border-gray-200">No. Register</th>
-                        <th class="border-gray-200">Nama Posyandu</th>
+                        <th class="border-gray-200">Lokasi Posyandu</th>
+                        <th class="border-gray-200">Nama Peserta</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($posyandu as $item)
+                    @foreach ($peserta as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->posyandu->name }}</td>
                             <td>{{ $item->name }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
@@ -64,58 +66,39 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
     @endif
 
-    {{-- <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination mb-0">
-                    <li class="page-item">
-                        <a class="page-link" href="#">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="fw-normal small mt-4 mt-lg-0">Showing <b>5</b> out of <b>25</b> entries</div>
-        </div> --}}
-    </div>
 @endsection
 
 @push('modals')
-    <form action="/posyandu/location" method="post" autocomplete="off">
+    <form action="/peserta/data" method="post" autocomplete="off">
         @csrf
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="h6 modal-title">Tambah Posyandu</h2>
+                        <h2 class="h6 modal-title">Tambah Peserta</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-4">
-                            <label for="name">Nama Posyandu</label>
+                        <div class="mb-3">
+                            <label for="location">Lokasi</label>
+                            <select name="posyandu_id" id="location" class="form-select">
+                                <option hidden>--Pilih Posyandu--</option>
+                                @foreach ($posyandu as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name">Nama Peserta</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Posyandu">
+                                placeholder="Masukkan Nama Peserta" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary">Tambah</button>
+                        <button type="submit" class="btn btn-secondary" disabled>Tambah</button>
                         <button type="button" class="btn btn-link text-gray-600 ms-auto"
                             data-bs-dismiss="modal">Close</button>
                     </div>
@@ -131,14 +114,20 @@
                     @method('patch')
                     @csrf
                     <div class="modal-header bg-secondary">
-                        <h2 class="h6 modal-title">Edit Data Posyandu</h2>
+                        <h2 class="h6 modal-title">Edit Data Peserta</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-4">
-                            <label for="name">Nama Posyandu</label>
+                        <div class="mb-3">
+                            <label for="location">Lokasi</label>
+                            <select name="posyandu_id" class="form-select">
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name">Nama Peserta</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Posyandu">
+                                placeholder="Masukkan Nama Peserta" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -159,12 +148,12 @@
                     @method('delete')
                     @csrf
                     <div class="modal-header bg-danger">
-                        <h2 class="h6 modal-title text-white">Hapus Data Posyandu</h2>
+                        <h2 class="h6 modal-title text-white">Hapus Data Peserta</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         Tekan tombol <b class="text-danger">Hapus</b> dibawah untuk mengkonfirmasi penghapusan data
-                        posyandu
+                        peserta posyandu
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Hapus</button>
@@ -179,21 +168,39 @@
 
 @push('scripts')
     <script>
+        $('#location').change(function() {
+            $('#addModal button[type=submit]').removeAttr('disabled')
+        })
+
         $('.btn-edit').click(function() {
             const id = $(this).data('id')
-            $('#editModal form').attr('action', '/posyandu/location/' + id)
-            fetch('/fetch/getPosyandu/' + id)
+            const posyandu = {!! json_encode($posyandu) !!};
+            const selectForm = $('#editModal select[name=posyandu_id]')
+            selectForm.empty()
+
+            $('#editModal form').attr('action', '/peserta/data/' + id)
+            fetch('/fetch/get-peserta/' + id)
                 .then(response => {
                     return response.json()
                 })
                 .then(data => {
+                    posyandu.forEach(element => {
+                        const option = $('<option>', {
+                            value: element.id,
+                            text: element.name,
+                        });
+                        if (element.id == data.posyandu_id) option.attr('selected', true)
+
+                        selectForm.append(option)
+                    });
+
                     $('#editModal #name').val(data.name)
                 })
         })
 
         $('.btn-delete').click(function() {
             const id = $(this).data('id')
-            $('#deleteModal form').attr('action', '/posyandu/location/' + id)
+            $('#deleteModal form').attr('action', '/peserta/data/' + id)
         })
     </script>
 @endpush
