@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kader;
+use App\Models\Peserta;
 use App\Models\Posyandu;
 use App\Models\Schedule;
 use App\Models\Vitamin;
@@ -23,6 +24,11 @@ class FetchController extends Controller
     public function getVitamin(Vitamin $vitamin)
     {
         return response()->json($vitamin);
+    }
+
+    public function getPeserta(Peserta $peserta)
+    {
+        return response()->json($peserta);
     }
 
     public function getSchedule(Schedule $schedule)

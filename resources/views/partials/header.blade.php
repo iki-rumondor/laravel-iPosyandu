@@ -16,5 +16,5 @@
             @endforeach
         </ol>
     </nav>
-    <h2 class="h4">{{ $title }}</h2>
+    <div class="display-4 fw-bolder">{{ $title }}</div>
 </div>
