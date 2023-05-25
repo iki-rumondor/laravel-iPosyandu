@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Imunisasi;
 use App\Models\Kader;
+use App\Models\Kb;
 use App\Models\Peserta;
 use App\Models\Posyandu;
 use App\Models\Schedule;
@@ -25,6 +26,11 @@ class FetchController extends Controller
     public function getVitamin(Vitamin $vitamin)
     {
         return response()->json($vitamin);
+    }
+
+    public function getKb(Kb $kb)
+    {
+        return response()->json($kb);
     }
     
     public function getImunisasi(Imunisasi $imunisasi)
