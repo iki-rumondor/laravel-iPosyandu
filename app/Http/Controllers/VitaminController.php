@@ -34,6 +34,7 @@ class VitaminController extends Controller
     {
         $validatedData = $this->validate($request, [
             'name' => 'required',
+            'stock' => 'required|min:1',
         ]);
 
         Vitamin::create($validatedData);
@@ -64,6 +65,7 @@ class VitaminController extends Controller
     {
         $validatedData = $this->validate($request, [
             'name' => 'required',
+            'stock' => 'required|min:1',
         ]);
 
         $vitamin->update($validatedData);

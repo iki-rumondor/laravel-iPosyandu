@@ -34,6 +34,7 @@ class KbController extends Controller
     {
         $validatedData = $this->validate($request, [
             'name' => 'required',
+            'stock' => 'required|min:1',
         ]);
 
         Kb::create($validatedData);
@@ -64,6 +65,7 @@ class KbController extends Controller
     {
         $validatedData = $this->validate($request, [
             'name' => 'required',
+            'stock' => 'required|min:1',
         ]);
 
         $kb->update($validatedData);

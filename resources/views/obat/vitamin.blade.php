@@ -11,7 +11,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
                     </path>
                 </svg>
-                Tambah Stok Imunisasi
+                Tambah Stok Vitamin
             </button>
 
         </div>
@@ -27,6 +27,7 @@
                 <thead>
                     <tr>
                         <th class="border-gray-200">Nama Vitamin</th>
+                        <th class="border-gray-200">Stok Vitamin</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@
                     @foreach ($vitamins as $vitamin)
                         <tr>
                             <td>{{ $vitamin->name }}</td>
+                            <td>{{ $vitamin->stock }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
                                     data-bs-target="#editModal" data-id="{{ $vitamin->id }}">
@@ -83,6 +85,11 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 placeholder="Masukkan Nama Vitamin" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="stock">Jumlah Stok</label>
+                            <input min="1" type="number" class="form-control" id="stock" name="stock"
+                                placeholder="Masukkan Stok Vitamin" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-secondary">Tambah</button>
@@ -106,9 +113,14 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name">Nama Kader</label>
+                            <label for="name">Nama Viatmin</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Kader" required>
+                                placeholder="Masukkan Nama Viatmin" required>
+                            <div class="mb-3">
+                                <label for="stock">Jumlah Stok</label>
+                                <input min="1" type="number" class="form-control" id="stock" name="stock"
+                                    placeholder="Masukkan Stok Vitamin" required>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -149,7 +161,6 @@
 
 @push('scripts')
     <script>
-
         $('.btn-edit').click(function() {
             const id = $(this).data('id')
 
@@ -160,6 +171,7 @@
                 })
                 .then(data => {
                     $('#editModal #name').val(data.name)
+                    $('#editModal #stock').val(data.stock)
                 })
         })
 

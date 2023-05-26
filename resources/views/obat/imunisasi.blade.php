@@ -27,6 +27,7 @@
                 <thead>
                     <tr>
                         <th class="border-gray-200">Nama Imunisasi</th>
+                        <th class="border-gray-200">Stok</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@
                     @foreach ($imunisasis as $imunisasi)
                         <tr>
                             <td>{{ $imunisasi->name }}</td>
+                            <td>{{ $imunisasi->stock }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
                                     data-bs-target="#editModal" data-id="{{ $imunisasi->id }}">
@@ -83,6 +85,11 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 placeholder="Masukkan Nama imunisasi" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="stock">Jumlah Stok</label>
+                            <input min="1" type="number" class="form-control" id="stock" name="stock"
+                                placeholder="Masukkan Stok Imunisasi" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-secondary">Tambah</button>
@@ -109,6 +116,11 @@
                             <label for="name">Nama Imunisasi</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 placeholder="Masukkan Nama Imunisasi" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock">Jumlah Stok</label>
+                            <input min="1" type="number" class="form-control" id="stock" name="stock"
+                                placeholder="Masukkan Stok Imunisasi" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -160,6 +172,7 @@
                 })
                 .then(data => {
                     $('#editModal #name').val(data.name)
+                    $('#editModal #stock').val(data.stock)
                 })
         })
 
