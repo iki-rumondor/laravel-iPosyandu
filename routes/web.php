@@ -1,18 +1,29 @@
 <?php
 
-use App\Http\Controllers\DataKaderController;
-use App\Http\Controllers\DataPesertaController;
-use App\Http\Controllers\FetchController;
-use App\Http\Controllers\ImunisasiController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KbController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FetchController;
+use App\Http\Controllers\VitaminController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\VitaminController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DataKaderController;
+use App\Http\Controllers\ImunisasiController;
+use App\Http\Controllers\DataPesertaController;
 
 // Route::get('/manajemen/posyandu', function () {
 //     return view('welcome');
 // });
+
+Route::middleware('guest')->group(function(){
+    Route::prefix('auth')->group(function () {
+        Route::get('login', [AuthController::class, 'viewLogin']);
+        Route::get('register', [AuthController::class, 'viewRegister']);
+        Route::get('logout', [AuthController::class, 'logout'])->withoutMiddleware('guest');
+        Route::post('login', [AuthController::class, 'login']);
+        Route::post('register', [AuthController::class, 'register']);
+    });
+});
 
 Route::prefix('posyandu')->group(function () {
     Route::resource('location', LocationController::class);
@@ -22,7 +33,6 @@ Route::prefix('posyandu')->group(function () {
 Route::prefix('kader')->group(function () {
     Route::resource('data', DataKaderController::class);
 });
-
 
 Route::prefix('peserta')->group(function () {
     Route::resource('data', DataPesertaController::class);
