@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Peserta;
 use App\Models\Posyandu;
 use Illuminate\Http\Request;
@@ -36,9 +37,20 @@ class DataPesertaController extends Controller
     {
         $validatedData = $this->validate($request, [
             'posyandu_id' => 'required',
-            'name' => 'required',
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required|unique:pesertas',
         ]);
 
+        $password = \bcrypt(\str_replace('-', '', $request->tanggal_lahir));
+        $user =  User::create([
+            'name' => $request->nama,
+            'password' => $password,
+        ]);
+
+        $validatedData['user_id'] = $user->id;
         Peserta::create($validatedData);
 
         return back()->with('success', 'Berhasil menambah data peserta');
@@ -67,7 +79,10 @@ class DataPesertaController extends Controller
     {
         $validatedData = $this->validate($request, [
             'posyandu_id' => 'required',
-            'name' => 'required',
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required',
         ]);
 
         $data->update($validatedData);
