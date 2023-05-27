@@ -29,6 +29,8 @@
                         <th class="border-gray-200">No. Register</th>
                         <th class="border-gray-200">Lokasi Posyandu</th>
                         <th class="border-gray-200">Nama Kader</th>
+                        <th class="border-gray-200">Alamat</th>
+                        <th class="border-gray-200">Nomor Telepon</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
                 </thead>
@@ -37,7 +39,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->posyandu->name }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->alamat }}</td>
+                            <td>{{ $item->no_telp }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
                                     data-bs-target="#editModal" data-id="{{ $item->id }}">
@@ -92,9 +96,31 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="name">Nama Kader</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Kader" required>
+                            <label for="nama">Nama Kader</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
+                                name="nama" placeholder="Masukkan Nama Kader" required value="{{ old('nama') }}">
+                            @error('nama')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat"
+                                name="alamat" placeholder="Masukkan Alamat Kader" required value="{{ old('alamat') }}">
+                            @error('alamat')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="no_telp">Nomor Telepon</label>
+                            <input type="number" class="form-control @error('no_telp') is-invalid @enderror"
+                                id="no_telp" name="no_telp" placeholder="Masukkan Nomor Telepon Kader" required
+                                value="{{ old('no_telp') }}">
+                            @error('no_telp')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -107,7 +133,8 @@
         </div>
     </form>
 
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form method="post" autocomplete="off">
@@ -125,9 +152,14 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="name">Nama Kader</label>
-                            <input type="text" class="form-control" id="name" name="name"
+                            <label for="nama">Nama Kader</label>
+                            <input type="text" class="form-control" id="nama" name="nama"
                                 placeholder="Masukkan Nama Kader" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat"
+                                placeholder="Masukkan Alamat Kader" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -186,15 +218,16 @@
                 .then(data => {
                     posyandu.forEach(element => {
                         const option = $('<option>', {
-                            value: element.id, 
+                            value: element.id,
                             text: element.name,
                         });
-                        if(element.id == data.posyandu_id) option.attr('selected', true)
+                        if (element.id == data.posyandu_id) option.attr('selected', true)
 
                         selectForm.append(option)
                     });
 
-                    $('#editModal #name').val(data.name)
+                    $('#editModal #nama').val(data.nama)
+                    $('#editModal #alamat').val(data.alamat)
                 })
         })
 

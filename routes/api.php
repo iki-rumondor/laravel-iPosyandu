@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\GetApiController;
+use App\Http\Controllers\Api\ApiKaderController;
+use App\Http\Controllers\Api\ApiPesertaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('get', GetApiController::class);
+Route::apiResource('peserta', ApiPesertaController::class)->parameters([
+    'peserta' => 'peserta'
+]);
+
+Route::apiResource('kader', ApiKaderController::class)->parameters([
+    'kader' => 'kader'
+]);

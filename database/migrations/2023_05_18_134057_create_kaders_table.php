@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('kaders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('posyandu_id');
-            $table->string('name');
+            $table->foreignId('user_id');
+            $table->string('nama');
+            $table->string('alamat');
+            $table->string('no_telp')->unique();
             $table->timestamps();
         });
     }

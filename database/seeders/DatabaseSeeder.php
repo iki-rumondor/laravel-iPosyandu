@@ -18,5 +18,9 @@ class DatabaseSeeder extends Seeder
             'name' => '123',
             'password' => \bcrypt(123),
         ]);
+
+        \App\Models\Posyandu::create([
+            'name' => 'Suwawa',
+        ]);
     }
 }
