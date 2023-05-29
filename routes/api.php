@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApiKaderController;
 use App\Http\Controllers\Api\ApiPesertaController;
+use App\Http\Controllers\Api\ApiVitaminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,8 @@ Route::apiResource('peserta', ApiPesertaController::class)->parameters([
 
 Route::apiResource('kader', ApiKaderController::class)->parameters([
     'kader' => 'kader'
+]);
+
+Route::apiResource('vitamin', ApiVitaminController::class)->parameters([
+    'vitamin' => 'vitamin'
 ]);

@@ -27,6 +27,7 @@
                 <thead>
                     <tr>
                         <th class="border-gray-200">Nama Vitamin</th>
+                        <th class="border-gray-200">Rentang Umur</th>
                         <th class="border-gray-200">Stok Vitamin</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
@@ -34,8 +35,9 @@
                 <tbody>
                     @foreach ($vitamins as $vitamin)
                         <tr>
-                            <td>{{ $vitamin->name }}</td>
-                            <td>{{ $vitamin->stock }}</td>
+                            <td>{{ $vitamin->nama }}</td>
+                            <td>{{ $vitamin->usia->keterangan }}</td>
+                            <td>{{ $vitamin->stok }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
                                     data-bs-target="#editModal" data-id="{{ $vitamin->id }}">
@@ -81,14 +83,32 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name">Nama Vitamin</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Vitamin" required>
+                            <label for="nama">Nama Vitamin</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
+                                name="nama" placeholder="Masukkan Nama Vitamin" required>
+                            @error('nama')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="stock">Jumlah Stok</label>
-                            <input min="1" type="number" class="form-control" id="stock" name="stock"
-                                placeholder="Masukkan Stok Vitamin" required>
+                            <label for="usia_id">Rentang Usia</label>
+                            <select name="usia_id" id="usia_id"
+                                class="form-select @error('usia_id') is-invalid @enderror">
+                                @foreach ($ages as $age)
+                                    <option value="{{ $age->id }}">{{ $age->keterangan }}</option>
+                                @endforeach
+                            </select>
+                            @error('usia_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="stok">Jumlah Stok</label>
+                            <input min="1" type="number" class="form-control @error('stok') is-invalid @enderror"
+                                id="stok" name="stok" placeholder="Masukkan Stok Vitamin" required>
+                            @error('stok')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -101,7 +121,8 @@
         </div>
     </form>
 
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form method="post" autocomplete="off">
@@ -113,14 +134,32 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name">Nama Viatmin</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Viatmin" required>
-                            <div class="mb-3">
-                                <label for="stock">Jumlah Stok</label>
-                                <input min="1" type="number" class="form-control" id="stock" name="stock"
-                                    placeholder="Masukkan Stok Vitamin" required>
-                            </div>
+                            <label for="nama">Nama Vitamin</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
+                                name="nama" placeholder="Masukkan Nama Vitamin" required>
+                            @error('nama')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="usia_id">Rentang Usia</label>
+                            <select name="usia_id" id="usia_id"
+                                class="form-select @error('usia_id') is-invalid @enderror">
+                                @foreach ($ages as $age)
+                                    <option value="{{ $age->id }}">{{ $age->keterangan }}</option>
+                                @endforeach
+                            </select>
+                            @error('usia_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="stok">Jumlah Stok</label>
+                            <input min="1" type="number" class="form-control @error('stok') is-invalid @enderror"
+                                id="stok" name="stok" placeholder="Masukkan Stok Vitamin" required>
+                            @error('stok')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -170,8 +209,9 @@
                     return response.json()
                 })
                 .then(data => {
-                    $('#editModal #name').val(data.name)
-                    $('#editModal #stock').val(data.stock)
+                    $('#editModal #nama').val(data.nama)
+                    $('#editModal #stok').val(data.stok)
+                    $('#editModal #usia_id').val(data.usia_id)
                 })
         })
 

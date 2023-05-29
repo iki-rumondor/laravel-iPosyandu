@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Age;
 use App\Models\Vitamin;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class VitaminController extends Controller
             'title' => 'Manajemen Vitamin',
             'breadcumb' => ['Manajemen Obat', 'Vitamin'],
             'vitamins' => Vitamin::all(),
+            'ages' => Age::all(),
         ]);
     }
 
@@ -33,8 +35,9 @@ class VitaminController extends Controller
     public function store(Request $request)
     {
         $validatedData = $this->validate($request, [
-            'name' => 'required',
-            'stock' => 'required|min:1',
+            'usia_id' => 'required',
+            'nama' => 'required',
+            'stok' => 'required|min:1',
         ]);
 
         Vitamin::create($validatedData);
@@ -64,8 +67,9 @@ class VitaminController extends Controller
     public function update(Request $request, Vitamin $vitamin)
     {
         $validatedData = $this->validate($request, [
-            'name' => 'required',
-            'stock' => 'required|min:1',
+            'usia_id' => 'required',
+            'nama' => 'required',
+            'stok' => 'required|min:1',
         ]);
 
         $vitamin->update($validatedData);
