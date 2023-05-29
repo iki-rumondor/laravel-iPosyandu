@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vitamin extends Model
+class Age extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function usia()
+    public function vitamins()
     {
-        return $this->belongsTo(Age::class);
+        return $this->hasMany(Vitamin::class);
     }
 }

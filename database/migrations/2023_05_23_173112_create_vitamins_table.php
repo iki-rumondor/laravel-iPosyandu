@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('vitamins', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('usia_id');
+            $table->string('nama');
+            $table->integer('stok');
             $table->timestamps();
         });
     }

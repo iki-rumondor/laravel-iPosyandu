@@ -33,11 +33,12 @@ class KbController extends Controller
     public function store(Request $request)
     {
         $validatedData = $this->validate($request, [
-            'name' => 'required',
+            'nama' => 'required',
+            'jenis' => 'required',
+            'stok' => 'required|min:1',
         ]);
 
         Kb::create($validatedData);
-
         return back()->with('success', 'Berhasil menambah data kb');
     }
 
@@ -63,7 +64,9 @@ class KbController extends Controller
     public function update(Request $request, Kb $kb)
     {
         $validatedData = $this->validate($request, [
-            'name' => 'required',
+            'nama' => 'required',
+            'jenis' => 'required',
+            'stok' => 'required|min:1',
         ]);
 
         $kb->update($validatedData);
@@ -77,7 +80,6 @@ class KbController extends Controller
     public function destroy(Kb $kb)
     {
         $kb->delete();
-
         return back()->with('success', 'Berhasil menghapus data kb');
     }
 }

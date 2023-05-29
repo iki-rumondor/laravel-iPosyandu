@@ -34,6 +34,7 @@ class ImunisasiController extends Controller
     {
         $validatedData = $this->validate($request, [
             'name' => 'required',
+            'stock' => 'required|min:1',
         ]);
 
         Imunisasi::create($validatedData);
@@ -64,6 +65,7 @@ class ImunisasiController extends Controller
     {
         $validatedData = $this->validate($request, [
             'name' => 'required',
+            'stock' => 'required|min:1',
         ]);
 
         $imunisasi->update($validatedData);

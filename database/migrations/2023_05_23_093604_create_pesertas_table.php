@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('pesertas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('posyandu_id');
-            $table->string('name');
+            $table->foreignId('user_id');
+            $table->string('nama');
+            $table->string('tempat_lahir');
+            $table->string('tanggal_lahir');
+            $table->string('alamat');
+            $table->string('no_telp')->unique();
             $table->timestamps();
         });
     }

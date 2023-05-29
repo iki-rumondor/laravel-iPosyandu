@@ -17,6 +17,7 @@ class ScheduleController extends Controller
             'title' => 'Penjadwalan Posyandu',
             'breadcumb' => ['Manajemen Posyandu', 'Penjadwalan'],
             'posyandu' => Posyandu::all(),
+            'schedules' => Schedule::latest('created_at')->take(5)->get()
         ]);
     }
 
@@ -66,7 +67,6 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
     }
 
     /**

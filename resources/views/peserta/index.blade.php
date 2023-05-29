@@ -29,6 +29,9 @@
                         <th class="border-gray-200">No. Register</th>
                         <th class="border-gray-200">Lokasi Posyandu</th>
                         <th class="border-gray-200">Nama Peserta</th>
+                        <th class="border-gray-200">Nomor Hp</th>
+                        <th class="border-gray-200">Tempat Tanggal Lahir</th>
+                        <th class="border-gray-200">Alamat</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
                 </thead>
@@ -37,7 +40,10 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->posyandu->name }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->no_telp }}</td>
+                            <td>{{ $item->tempat_lahir }}, {{ ubahFormatTanggal($item->tanggal_lahir) }}</td>
+                            <td>{{ $item->alamat }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
                                     data-bs-target="#editModal" data-id="{{ $item->id }}">
@@ -84,17 +90,60 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="location">Lokasi</label>
-                            <select name="posyandu_id" id="location" class="form-select">
+                            <select name="posyandu_id" id="location"
+                                class="form-select @error('posyandu_id') is-invalid @enderror">
                                 <option hidden>--Pilih Posyandu--</option>
                                 @foreach ($posyandu as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}"
+                                        {{ $item->id == old('location') ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
+                            @error('posyandu_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="name">Nama Peserta</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Peserta" required>
+                            <label for="nama">Nama Peserta</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
+                                name="nama" placeholder="Masukkan Nama Peserta" required value="{{ old('nama') }}">
+                            @error('nama')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="tempat_lahir">Tempat Lahir Peserta</label>
+                            <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror"
+                                id="tempat_lahir" name="tempat_lahir" placeholder="Masukkan Nama Peserta" required
+                                value="{{ old('tempat_lahir') }}">
+                            @error('tempat_lahir')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="tanggal_lahir">Tanggal Lahir Peserta</label>
+                            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
+                                id="tanggal_lahir" name="tanggal_lahir" required value="{{ old('tanggal_lahir') }}">
+                            @error('tanggal_lahir')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" class="form-control @error('alamat') is-invalid @enderror"
+                                id="alamat" name="alamat" placeholder="Masukkan Alamat Peserta" required
+                                value="{{ old('alamat') }}">
+                            @error('alamat')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="no_telp">Nomor Telepon</label>
+                            <input type="number" class="form-control @error('no_telp') is-invalid @enderror"
+                                id="no_telp" name="no_telp" placeholder="Masukkan Nama Peserta" required
+                                value="{{ old('no_telp') }}">
+                            @error('no_telp')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -107,7 +156,8 @@
         </div>
     </form>
 
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form method="post" autocomplete="off">
@@ -125,9 +175,23 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="name">Nama Peserta</label>
-                            <input type="text" class="form-control" id="name" name="name"
+                            <label for="nama">Nama Peserta</label>
+                            <input type="text" class="form-control" id="nama" name="nama"
                                 placeholder="Masukkan Nama Peserta" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tempat_lahir">Tempat Lahir Peserta</label>
+                            <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                                placeholder="Masukkan Nama Peserta" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tanggal_lahir">Tanggal Lahir Peserta</label>
+                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat"
+                                placeholder="Masukkan Alamat Peserta" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -194,7 +258,10 @@
                         selectForm.append(option)
                     });
 
-                    $('#editModal #name').val(data.name)
+                    $('#editModal #nama').val(data.nama)
+                    $('#editModal #tempat_lahir').val(data.tempat_lahir)
+                    $('#editModal #tanggal_lahir').val(data.tanggal_lahir)
+                    $('#editModal #alamat').val(data.alamat)
                 })
         })
 

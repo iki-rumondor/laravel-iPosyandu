@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Kader;
 use App\Models\Posyandu;
 use Illuminate\Http\Request;
 
 class DataKaderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('kader.data.index', [
@@ -21,54 +19,35 @@ class DataKaderController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validatedData = $this->validate($request, [
             'posyandu_id' => 'required',
-            'name' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required|unique:kaders',
         ]);
+
+        $password = \bcrypt(\str_replace('-', '', $request->tanggal_lahir));
+        $user =  User::create([
+            'name' => $request->nama,
+            'password' => $password,
+        ]);
+
+        $validatedData['user_id'] = $user->id;
 
         Kader::create($validatedData);
 
         return back()->with('success', 'Berhasil menambah data kader');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Kader $data)
     {
         
         $validatedData = $this->validate($request, [
             'posyandu_id' => 'required',
-            'name' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
         ]);
 
         $data->update($validatedData);
@@ -77,9 +56,6 @@ class DataKaderController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Kader $data)
     {
         $data->delete();
