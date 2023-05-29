@@ -27,6 +27,7 @@
                 <thead>
                     <tr>
                         <th class="border-gray-200">Nama Kb</th>
+                        <th class="border-gray-200">Jenis Kb</th>
                         <th class="border-gray-200">Stok</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
@@ -34,8 +35,9 @@
                 <tbody>
                     @foreach ($kbs as $kb)
                         <tr>
-                            <td>{{ $kb->name }}</td>
-                            <td>{{ $kb->stock }}</td>
+                            <td>{{ $kb->nama }}</td>
+                            <td>{{ $kb->jenis }}</td>
+                            <td>{{ $kb->stok }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
                                     data-bs-target="#editModal" data-id="{{ $kb->id }}">
@@ -81,14 +83,28 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name">Nama Kb</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Kb" required>
+                            <label for="nama">Nama Kb</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
+                                name="nama" placeholder="Masukkan Nama Kb" required>
+                            @error('nama')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="stock">Jumlah Stok</label>
-                            <input min="1" type="number" class="form-control" id="stock" name="stock"
-                                placeholder="Masukkan Stok Kb" required>
+                            <label for="jenis">Jenis Kb</label>
+                            <input type="text" class="form-control @error('jenis') is-invalid @enderror" id="jenis"
+                                name="jenis" placeholder="Masukkan Jenis Kb" required>
+                            @error('jenis')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="stok">Jumlah Stok</label>
+                            <input min="1" type="number" class="form-control @error('stok') is-invalid @enderror"
+                                id="stok" name="stok" placeholder="Masukkan Stok Kb" required>
+                            @error('stok')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -101,7 +117,8 @@
         </div>
     </form>
 
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form method="post" autocomplete="off">
@@ -113,14 +130,28 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name">Nama Kb</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Masukkan Nama Kb" required>
+                            <label for="nama">Nama Kb</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
+                                name="nama" placeholder="Masukkan Nama Kb" required>
+                            @error('nama')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="stock">Jumlah Stok</label>
-                            <input min="1" type="number" class="form-control" id="stock" name="stock"
-                                placeholder="Masukkan Stok Kb" required>
+                            <label for="jenis">Jenis Kb</label>
+                            <input type="text" class="form-control @error('jenis') is-invalid @enderror"
+                                id="jenis" name="jenis" placeholder="Masukkan Jenis Kb" required>
+                            @error('jenis')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="stok">Jumlah Stok</label>
+                            <input min="1" type="number" class="form-control @error('stok') is-invalid @enderror"
+                                id="stok" name="stok" placeholder="Masukkan Stok Kb" required>
+                            @error('stok')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -161,7 +192,6 @@
 
 @push('scripts')
     <script>
-
         $('.btn-edit').click(function() {
             const id = $(this).data('id')
 
@@ -171,8 +201,9 @@
                     return response.json()
                 })
                 .then(data => {
-                    $('#editModal #name').val(data.name)
-                    $('#editModal #stock').val(data.stock)
+                    $('#editModal #nama').val(data.nama)
+                    $('#editModal #jenis').val(data.jenis)
+                    $('#editModal #stok').val(data.stok)
                 })
         })
 

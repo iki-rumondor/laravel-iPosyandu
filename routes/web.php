@@ -11,11 +11,9 @@ use App\Http\Controllers\DataKaderController;
 use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\DataPesertaController;
 
-// Route::get('/manajemen/posyandu', function () {
-//     return view('welcome');
-// });
 
-Route::middleware('guest')->group(function(){
+Route::middleware('guest')->group(function () {
+    Route::get('/', [AuthController::class, 'viewLogin']);
     Route::prefix('auth')->group(function () {
         Route::get('login', [AuthController::class, 'viewLogin'])->name('login');
         Route::get('register', [AuthController::class, 'viewRegister']);
@@ -30,21 +28,21 @@ Route::middleware('auth')->group(function () {
         Route::resource('location', LocationController::class);
         Route::resource('schedule', ScheduleController::class);
     });
-    
+
     Route::prefix('kader')->group(function () {
         Route::resource('data', DataKaderController::class);
     });
-    
+
     Route::prefix('peserta')->group(function () {
         Route::resource('data', DataPesertaController::class);
     });
-    
+
     Route::prefix('obat')->group(function () {
         Route::resource('vitamin', VitaminController::class);
         Route::resource('imunisasi', ImunisasiController::class);
         Route::resource('kb', KbController::class);
     });
-    
+
     Route::prefix('fetch')->group(function () {
         Route::get('get-posyandu/{posyandu}', [FetchController::class, 'getPosyandu']);
         Route::get('get-schedule/{schedule}', [FetchController::class, 'getSchedule']);

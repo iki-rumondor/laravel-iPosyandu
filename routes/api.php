@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\ApiKaderController;
+use App\Http\Controllers\Api\ApiKbController;
 use App\Http\Controllers\Api\ApiPesertaController;
+use App\Http\Controllers\Api\ApiScheduleController;
 use App\Http\Controllers\Api\ApiVitaminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +33,12 @@ Route::apiResource('kader', ApiKaderController::class)->parameters([
 
 Route::apiResource('vitamin', ApiVitaminController::class)->parameters([
     'vitamin' => 'vitamin'
+]);
+
+Route::apiResource('kb', ApiKbController::class)->parameters([
+    'kb' => 'kb'
+]);
+
+Route::apiResource('schedule', ApiScheduleController::class)->parameters([
+    'schedule' => 'schedule'
 ]);
