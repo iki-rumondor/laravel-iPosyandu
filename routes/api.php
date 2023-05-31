@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ApiKbController;
 use App\Http\Controllers\Api\ApiPesertaController;
 use App\Http\Controllers\Api\ApiScheduleController;
 use App\Http\Controllers\Api\ApiVitaminController;
+use App\Http\Controllers\Api\ApiImunisasiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,10 @@ Route::apiResource('vitamin', ApiVitaminController::class)->parameters([
 
 Route::apiResource('kb', ApiKbController::class)->parameters([
     'kb' => 'kb'
+]);
+
+Route::apiResource('imunisasi', ApiImunisasiController::class)->parameters([
+    'imunisasi' => 'imunisasi'
 ]);
 
 Route::apiResource('schedule', ApiScheduleController::class)->parameters([
