@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('desa_id');
             $table->string('nama');
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

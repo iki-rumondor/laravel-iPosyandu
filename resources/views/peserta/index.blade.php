@@ -27,7 +27,7 @@
                 <thead>
                     <tr>
                         <th class="border-gray-200">No. Register</th>
-                        <th class="border-gray-200">Lokasi Posyandu</th>
+                        <th class="border-gray-200">Posyandu</th>
                         <th class="border-gray-200">Nama Peserta</th>
                         <th class="border-gray-200">Nomor Hp</th>
                         <th class="border-gray-200">Tempat Tanggal Lahir</th>
@@ -39,7 +39,7 @@
                     @foreach ($peserta as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->posyandu->name }}</td>
+                            <td>{{ $item->posyandu->nama }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->no_telp }}</td>
                             <td>{{ $item->tempat_lahir }}, {{ ubahFormatTanggal($item->tanggal_lahir) }}</td>
@@ -95,7 +95,7 @@
                                 <option hidden>--Pilih Posyandu--</option>
                                 @foreach ($posyandu as $item)
                                     <option value="{{ $item->id }}"
-                                        {{ $item->id == old('location') ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        {{ $item->id == old('location') ? 'selected' : '' }}>{{ $item->nama }}</option>
                                 @endforeach
                             </select>
                             @error('posyandu_id')
@@ -251,7 +251,7 @@
                     posyandu.forEach(element => {
                         const option = $('<option>', {
                             value: element.id,
-                            text: element.name,
+                            text: element.nama,
                         });
                         if (element.id == data.posyandu_id) option.attr('selected', true)
 

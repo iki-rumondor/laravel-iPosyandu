@@ -13,6 +13,6 @@ class Kader extends Model
 
     public function posyandu()
     {
-        return $this->belongsTo(Posyandu::class);   
+        return $this->belongsTo(Posyandu::class);
     }
 }

@@ -15,7 +15,7 @@
                         <select name="posyandu_id" id="location" class="form-select">
                             <option hidden>--Pilih Posyandu--</option>
                             @foreach ($posyandu as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -151,7 +151,7 @@
                     <tbody>
                         @foreach ($schedules as $schedule)
                             <tr>
-                                <td>{{ $schedule->posyandu->name }}</td>
+                                <td>{{ $schedule->posyandu->nama }}</td>
                                 <td>{{ $schedule->date }}</td>
                                 <td><span
                                         class="badge {{ $schedule->status == 'Terjadwal' ? 'bg-primary' : 'bg-success' }}">{{ $schedule->status }}</span>
