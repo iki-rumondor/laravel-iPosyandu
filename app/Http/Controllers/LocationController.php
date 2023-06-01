@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Desa;
 use App\Models\Posyandu;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class LocationController extends Controller
     {
         return view('posyandu.location.index', [
             'title' => 'Penempatan Lokasi Posyandu',
-            'breadcumb' => ['Manajemen Posyandu', 'Penentuan Lokasi'],
+            'breadcumb' => ['Manajemen Posyandu', 'Input Lokasi'],
             'posyandu' => Posyandu::all(),
+            'desa' => Desa::all(),
         ]);
     }
 
@@ -32,7 +34,8 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $validatedData = $this->validate($request, [
-            'name' => 'required'
+            'nama' => 'required',
+            'desa_id' => 'required'
         ]);
 
         Posyandu::create($validatedData);
@@ -63,7 +66,8 @@ class LocationController extends Controller
     {
         
         $validatedData = $this->validate($request, [
-            'name' => 'required'
+            'nama' => 'required',
+            'desa_id' => 'required',
         ]);
 
         $location->update($validatedData);

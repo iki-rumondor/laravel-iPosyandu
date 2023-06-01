@@ -21,9 +21,6 @@ class DatabaseSeeder extends Seeder
             'password' => \bcrypt(123),
         ]);
 
-        \App\Models\Posyandu::create([
-            'name' => 'Suwawa',
-        ]);
 
         Age::create([
             'keterangan' => 'Bayi'
@@ -40,10 +37,13 @@ class DatabaseSeeder extends Seeder
         Age::create([
             'keterangan' => 'Ibu Menyusui'
         ]);
-        
+
         Age::create([
             'keterangan' => 'Umum'
         ]);
 
+        $this->call([
+            DesaSeeder::class
+        ]);
     }
 }
