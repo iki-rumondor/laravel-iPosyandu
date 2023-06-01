@@ -122,6 +122,15 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="tanggal_lahir">Tanggal Lahir Kader</label>
+                            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
+                                id="tanggal_lahir" name="tanggal_lahir" required value="{{ old('tanggal_lahir') }}">
+                            @error('tanggal_lahir')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-secondary" disabled>Tambah</button>

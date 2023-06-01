@@ -27,6 +27,7 @@ class DataKaderController extends Controller
             'nama' => 'required',
             'alamat' => 'required',
             'no_telp' => 'required|unique:kaders',
+            'tanggal_lahir' => 'required',
         ]);
 
         $password = \bcrypt(\str_replace('-', '', $request->tanggal_lahir));

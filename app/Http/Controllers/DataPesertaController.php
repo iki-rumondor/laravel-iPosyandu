@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MobileUser;
 use App\Models\User;
 use App\Models\Peserta;
 use App\Models\Posyandu;
@@ -31,9 +32,10 @@ class DataPesertaController extends Controller
         ]);
 
         $password = \bcrypt(\str_replace('-', '', $request->tanggal_lahir));
-        $user =  User::create([
-            'name' => $request->nama,
+        $user =  MobileUser::create([
+            'no_telp' => $request->no_telp,
             'password' => $password,
+            'status' => 'peserta',
         ]);
 
         $validatedData['user_id'] = $user->id;
