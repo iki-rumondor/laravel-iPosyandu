@@ -15,4 +15,9 @@ class Kader extends Model
     {
         return $this->belongsTo(Posyandu::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(MobileUser::class);
+    }
 }

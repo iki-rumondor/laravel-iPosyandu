@@ -38,6 +38,7 @@ class LocationController extends Controller
             'desa_id' => 'required'
         ]);
 
+        $validatedData['user_id'] = auth()->user()->id;
         Posyandu::create($validatedData);
 
         return back()->with('success', 'Berhasil menambah data posyandu');

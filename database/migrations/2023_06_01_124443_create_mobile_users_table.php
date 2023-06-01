@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posyandus', function (Blueprint $table) {
+        Schema::create('mobile_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('desa_id');
-            $table->foreignId('user_id');
-            $table->string('nama');
+            $table->string('no_telp');
+            $table->string('password');
+            $table->string('status');
             $table->timestamps();
-        }); 
+        });
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posyandus');
+        Schema::dropIfExists('mobile_users');
     }
 };
