@@ -37,7 +37,7 @@ class DataKaderController extends Controller
             'status' => 'kader',
         ]);
 
-        $validatedData['user_id'] = $user->id;
+        $validatedData['mobile_user_id'] = $user->id;
         Kader::create($validatedData);
 
         return back()->with('success', 'Berhasil menambah data kader');

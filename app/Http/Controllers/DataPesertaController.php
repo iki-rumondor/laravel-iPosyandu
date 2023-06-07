@@ -38,7 +38,7 @@ class DataPesertaController extends Controller
             'status' => 'peserta',
         ]);
 
-        $validatedData['user_id'] = $user->id;
+        $validatedData['mobile_user_id'] = $user->id;
         Peserta::create($validatedData);
 
         return back()->with('success', 'Berhasil menambah data peserta');

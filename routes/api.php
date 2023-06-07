@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiKaderController;
 use App\Http\Controllers\Api\ApiKbController;
 use App\Http\Controllers\Api\ApiPesertaController;
@@ -52,3 +53,5 @@ Route::apiResource('schedule', ApiScheduleController::class)->parameters([
 Route::apiResource('posyandu', ApiPosyanduController::class)->parameters([
     'posyandu' => 'posyandu'
 ]);
+
+Route::post('/login', [ApiAuthController::class, 'login']);
