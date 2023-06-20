@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('imunisasis', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->integer('stock');
+            $table->string('jenis');
+            $table->integer('stok');
             $table->timestamps();
         });
     }

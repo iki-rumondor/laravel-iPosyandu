@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiKaderController;
 use App\Http\Controllers\Api\ApiKbController;
 use App\Http\Controllers\Api\ApiPesertaController;
 use App\Http\Controllers\Api\ApiScheduleController;
 use App\Http\Controllers\Api\ApiVitaminController;
+use App\Http\Controllers\Api\ApiPosyanduController;
+use App\Http\Controllers\Api\ApiImunisasiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +42,16 @@ Route::apiResource('kb', ApiKbController::class)->parameters([
     'kb' => 'kb'
 ]);
 
+Route::apiResource('imunisasi', ApiImunisasiController::class)->parameters([
+    'imunisasi' => 'imunisasi'
+]);
+
 Route::apiResource('schedule', ApiScheduleController::class)->parameters([
     'schedule' => 'schedule'
 ]);
+
+Route::apiResource('posyandu', ApiPosyanduController::class)->parameters([
+    'posyandu' => 'posyandu'
+]);
+
+Route::post('/login', [ApiAuthController::class, 'login']);

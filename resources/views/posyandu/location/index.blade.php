@@ -26,8 +26,9 @@
             <table id="posyandu-table" class="table table-hover display">
                 <thead>
                     <tr>
-                        <th class="border-gray-200">No. Register</th>
+                        <th class="border-gray-200">Nomor</th>
                         <th class="border-gray-200">Nama Posyandu</th>
+                        <th class="border-gray-200">Lokasi</th>
                         <th class="border-gray-200">Action</th>
                     </tr>
                 </thead>
@@ -35,7 +36,8 @@
                     @foreach ($posyandu as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->desa->nama }}</td>
                             <td>
                                 <button class="btn-edit btn btn-sm btn-secondary animate-up-3" data-bs-toggle="modal"
                                     data-bs-target="#editModal" data-id="{{ $item->id }}">
@@ -64,37 +66,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
     @endif
 
-    {{-- <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination mb-0">
-                    <li class="page-item">
-                        <a class="page-link" href="#">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="fw-normal small mt-4 mt-lg-0">Showing <b>5</b> out of <b>25</b> entries</div>
-        </div> --}}
-    </div>
 @endsection
 
 @push('modals')
@@ -108,10 +82,18 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-4">
-                            <label for="name">Nama Posyandu</label>
-                            <input type="text" class="form-control" id="name" name="name"
+                        <div class="mb-3">
+                            <label for="nama">Nama Posyandu</label>
+                            <input type="text" class="form-control" id="nama" name="nama"
                                 placeholder="Masukkan Nama Posyandu">
+                        </div>
+                        <div class="mb-3">
+                            <label for="desa">Lokasi</label>
+                            <select name="desa_id" id="desa" class="form-select">
+                                @foreach ($desa as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -135,10 +117,16 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-4">
-                            <label for="name">Nama Posyandu</label>
-                            <input type="text" class="form-control" id="name" name="name"
+                        <div class="mb-3">
+                            <label for="nama">Nama Posyandu</label>
+                            <input type="text" class="form-control" id="nama" name="nama"
                                 placeholder="Masukkan Nama Posyandu">
+                        </div>
+                        <div class="mb-3">
+                            <label for="desa">Lokasi</label>
+                            <select name="desa_id" id="desa" class="form-select">
+                                
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -181,13 +169,28 @@
     <script>
         $('.btn-edit').click(function() {
             const id = $(this).data('id')
+            const desa = {!! json_encode($desa) !!};
+            const selectForm = $('#editModal select[name=desa_id]')
+            
+            selectForm.empty()
             $('#editModal form').attr('action', '/posyandu/location/' + id)
-            fetch('/fetch/getPosyandu/' + id)
+
+            fetch('/fetch/get-posyandu/' + id)
                 .then(response => {
                     return response.json()
                 })
                 .then(data => {
-                    $('#editModal #name').val(data.name)
+                    desa.forEach(element => {
+                        const option = $('<option>', {
+                            value: element.id,
+                            text: element.nama,
+                        });
+                        if (element.id == data.desa_id) option.attr('selected', true)
+
+                        selectForm.append(option)
+                    });
+
+                    $('#editModal #nama').val(data.nama)
                 })
         })
 

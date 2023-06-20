@@ -20,4 +20,16 @@ class Posyandu extends Model
     {
         return $this->hasMany(Peserta::class);
     }
+
+    public function desa()
+    {
+        return $this->belongsTo(Desa::class);
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
 }

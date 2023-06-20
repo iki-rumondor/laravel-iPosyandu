@@ -27,7 +27,7 @@
                 <thead>
                     <tr>
                         <th class="border-gray-200">No. Register</th>
-                        <th class="border-gray-200">Lokasi Posyandu</th>
+                        <th class="border-gray-200">Posyandu</th>
                         <th class="border-gray-200">Nama Kader</th>
                         <th class="border-gray-200">Alamat</th>
                         <th class="border-gray-200">Nomor Telepon</th>
@@ -38,7 +38,7 @@
                     @foreach ($kader as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->posyandu->name }}</td>
+                            <td>{{ $item->posyandu->nama }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->alamat }}</td>
                             <td>{{ $item->no_telp }}</td>
@@ -91,7 +91,7 @@
                             <select name="posyandu_id" id="location" class="form-select">
                                 <option hidden>--Pilih Posyandu--</option>
                                 @foreach ($posyandu as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -119,6 +119,15 @@
                                 id="no_telp" name="no_telp" placeholder="Masukkan Nomor Telepon Kader" required
                                 value="{{ old('no_telp') }}">
                             @error('no_telp')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tanggal_lahir">Tanggal Lahir Kader</label>
+                            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
+                                id="tanggal_lahir" name="tanggal_lahir" required value="{{ old('tanggal_lahir') }}">
+                            @error('tanggal_lahir')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -219,7 +228,7 @@
                     posyandu.forEach(element => {
                         const option = $('<option>', {
                             value: element.id,
-                            text: element.name,
+                            text: element.nama,
                         });
                         if (element.id == data.posyandu_id) option.attr('selected', true)
 

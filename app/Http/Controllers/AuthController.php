@@ -48,6 +48,8 @@ class AuthController extends Controller
 
             return redirect()->intended('/posyandu/location')->with('success', 'Selamat datang di Sistem Informasi Posyandu');
         }
+
+        return back()->with('fail', 'Password yang dimasukkan tidak sesuai');
     }
 
     public function logout(Request $request)

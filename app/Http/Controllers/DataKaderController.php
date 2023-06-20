@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Kader;
+use App\Models\MobileUser;
 use App\Models\Posyandu;
 use Illuminate\Http\Request;
 
@@ -26,16 +27,17 @@ class DataKaderController extends Controller
             'nama' => 'required',
             'alamat' => 'required',
             'no_telp' => 'required|unique:kaders',
+            'tanggal_lahir' => 'required',
         ]);
 
         $password = \bcrypt(\str_replace('-', '', $request->tanggal_lahir));
-        $user =  User::create([
-            'name' => $request->nama,
+        $user =  MobileUser::create([
+            'no_telp' => $request->no_telp,
             'password' => $password,
+            'status' => 'kader',
         ]);
 
-        $validatedData['user_id'] = $user->id;
-
+        $validatedData['mobile_user_id'] = $user->id;
         Kader::create($validatedData);
 
         return back()->with('success', 'Berhasil menambah data kader');
