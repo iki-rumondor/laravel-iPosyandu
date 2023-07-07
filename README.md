@@ -4,6 +4,25 @@
 Berisi beberapa API yang disediakan oleh web iPosyandu
 
 
+### Login
+
+* Url
+  * /api/login
+
+* Method
+  * POST
+
+* Response
+
+
+```markdown
+  {
+    "nama": "Itachi",
+    "token": "2|ugNBTWLSRBNrgFFv6i2EqdHQDpGMfAEEx4IWjF6a"
+}
+```
+
+
 ### Get all jadwal
 
 * Url
