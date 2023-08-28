@@ -28,7 +28,8 @@ https://iposyandu.labinformatikaung.id/
 ```markdown
   {
     "nama": "Itachi",
-    "token": "2|ugNBTWLSRBNrgFFv6i2EqdHQDpGMfAEEx4IWjF6a"
+    "token": "2|ugNBTWLSRBNrgFFv6i2EqdHQDpGMfAEEx4IWjF6a",
+    "status": "peserta"
 }
 ```
 
