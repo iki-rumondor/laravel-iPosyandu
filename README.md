@@ -3,6 +3,8 @@
 
 Berisi beberapa API yang disediakan oleh web iPosyandu
 
+### Link
+https://iposyandu.labinformatikaung.id/
 
 ### Login
 
@@ -12,8 +14,16 @@ Berisi beberapa API yang disediakan oleh web iPosyandu
 * Method
   * POST
 
-* Response
+* Request
 
+```markdown
+  {
+    "no_telp": "123123123",
+    "password": "01010100"
+}
+```
+
+* Response
 
 ```markdown
   {
